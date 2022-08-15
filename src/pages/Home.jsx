@@ -1,3 +1,4 @@
+import CocktailList from "../components/CocktailList";
 import Search from "../components/Search";
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
       {/* Search Component */}
       <Search />
       {/* Cocktail Component */}
+      <CocktailList />
     </div>
   );
 };

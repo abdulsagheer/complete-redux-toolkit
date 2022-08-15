@@ -1,24 +1,36 @@
 import React, { useRef } from "react";
+import { fetchSearchCocktail } from "../redux/features/cocktailSlice";
+import { useDispatch } from "react-redux";
+import "./SearchInput.css";
 
-const Search = () => {
+const SearchInput = () => {
   const searchValue = useRef();
+  const dispatch = useDispatch();
+
+  const handleChange = () => {
+    const searchText = searchValue.current.value;
+    dispatch(fetchSearchCocktail({ searchText }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
-    <div class="container-fluid">
-      <form class="d-flex input-group w-auto">
-        <input
-          type="search"
-          class="form-control rounded"
-          placeholder="Search Cocktail"
-          aria-label="Search"
-          aria-describedby="search-addon"
-          ref={searchValue}
-        />
-        <span class="input-group-text border-0" id="search-addon">
-          <i class="fas fa-search"></i>
-        </span>
+    <section className="section search">
+      <form className="search-form" onSubmit={handleSubmit}>
+        <div className="form-control">
+          <label htmlFor="name">Search Cocktail</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            ref={searchValue}
+            onChange={handleChange}
+          />
+        </div>
       </form>
-    </div>
+    </section>
   );
 };
 
-export default Search;
+export default SearchInput;
